@@ -6,7 +6,7 @@
       v-for="pokemon in readyPokemons"
       :key="pokemon.id"
       :id="pokemon.id"
-      :name="search"
+      :name="pokemon.name"
       :types="pokemon.types"
       :stats="pokemon.stats"
     />
@@ -28,7 +28,7 @@
   import Card from "@/components/Card.vue";
   import useAppStore from '@/store/app'
 
-  const { search } = useAppStore();
+  // const { search } = useAppStore();
   
   export default {
     
@@ -39,7 +39,7 @@
     data: () => ({
       pokemons: [] as Pokemon[],
       readyPokemons: [] as Pokemon[],
-      search: search,
+      // search: search,
       pagination: {
         page: 1,
         pageSize: 12,

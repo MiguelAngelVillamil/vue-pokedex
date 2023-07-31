@@ -43,8 +43,8 @@
 
 <script lang="ts">
 
-	import useAppStore from '@/store/app'
-  const { setSearch } = useAppStore();
+	// import useAppStore from '@/store/app'
+  // const { setSearch } = useAppStore();
 
   export default {
 		
@@ -56,7 +56,7 @@
 
 		methods: {
 			updateSearch() {
-				setSearch(this.search);
+				// setSearch(this.search);
 			}
 		}
   }
