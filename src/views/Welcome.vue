@@ -1,23 +1,9 @@
 <template>
 
-  <v-sheet class="d-flex align-content-start flex-wrap">
-    <Card 
-      class="ma-5"
-      v-for="pokemon in readyPokemons"
-      :key="pokemon.id"
-      :id="pokemon.id"
-      :name="pokemon.name"
-      :types="pokemon.types"
-      :stats="pokemon.stats"
-    />
-  </v-sheet>
-  
-  <v-pagination
-    density="compact"
-    v-model="pagination.page"
-    :length="Math.ceil(filteredPokemons.length / pagination.elementsPerWidth)"
-    @update:model-value="updatePage"
-  ></v-pagination>
+  <v-card-title class="text-h6 text-md-h5 text-lg-h4">Title</v-card-title>
+  <v-card-text>
+    Body text
+  </v-card-text>
     
 </template>
 

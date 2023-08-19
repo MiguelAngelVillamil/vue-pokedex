@@ -71,11 +71,13 @@
         } as any,
       };
     },
+
     computed: {
       mainColor() {
         return this.colorTypes[this.readyTypes[0]];
       },
     },
+    
     mounted() {
       this.types.forEach((element: any) =>
         this.readyTypes.push(element.type.name)

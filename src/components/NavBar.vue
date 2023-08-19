@@ -1,63 +1,86 @@
 <template>
-		<v-navigation-drawer expand-on-hover rail permanent>
-			<v-list>
-				<v-list-item
-					prepend-avatar="src/assets/img/profiles/pikachu.png"
-					title="Pikachu"
-					subtitle="Angel Villamil"
-				></v-list-item>
-			</v-list>
+		<v-navigation-drawer permanent :rail="rail" @click="rail = false">
 
-			<v-divider></v-divider>
+			<v-list-item
+				nav
+				prepend-avatar="src/assets/img/profiles/pikachu.png"
+				title="Pokedex"
+				subtitle="by M. Angel Villamil"
+			>
+				<template v-slot:append>
+					<v-btn
+						variant="text"
+						icon="mdi-chevron-left"
+						@click.stop="rail = !rail"
+					></v-btn>
+				</template>
+			</v-list-item>
+
+			<v-divider />
 
 			<v-list density="compact" nav>
 
-				<v-list-item prepend-icon="mdi-magnify">
+				<v-list-item>
 					<v-text-field
+						prepend-icon="mdi-magnify"
 						v-model="search"
 						@input="updateSearch"
-						clearable
-						variant="plain"
+						@click:clear="clearSearch"
 						placeholder="Search"
+						variant="outlined"
+						density="compact"
+						clearable
 					></v-text-field>
 				</v-list-item>
 				
-				<v-list-item
-					prepend-icon="mdi-folder"
-					title="My Files"
-					value="myfiles"
-				></v-list-item>
-				<v-list-item
-					prepend-icon="mdi-account-multiple"
-					title="Shared with me"
-					value="shared"
-				></v-list-item>
-				<v-list-item
-					prepend-icon="mdi-star"
-					title="Starred"
-					value="starred"
-				></v-list-item>
+				<v-list-item>
+					<v-select
+						prepend-icon="mdi-pokeball"
+						v-model="types"
+						@vnode-updated="updateTypes"
+						:items="itemsTypes"
+						multiple
+						placeholder="Types"
+						variant="outlined"
+						density="compact"
+						chips
+						clearable
+					></v-select>
+				</v-list-item>
+
 			</v-list>
 		</v-navigation-drawer>
 </template>
 
 <script lang="ts">
 
-	// import useAppStore from '@/store/app'
-  // const { setSearch } = useAppStore();
+	import { mapMutations } from 'vuex';
 
   export default {
-		
-    data () {
-      return {
-        search: '',
-      }
+        
+	data () {
+		return {
+			rail: true,
+			search: "",
+			types: [],
+			itemsTypes: ["grass","normal", "fighting", "flying", "poison", "ground", "rock", "bug", "ghost", "steel", "fire", "water", "electric", "psychic", "ice", "dragon", "dark", "fairy", "unknown", "shadow"],
+		}
+	},
+
+  methods: {
+    ...mapMutations(['setSearch', 'setTypes']),
+
+    updateSearch() {
+      this.setSearch(this.search);
     },
 
-		methods: {
-			updateSearch() {
-				// setSearch(this.search);
-			}
+		clearSearch() {
+      this.setSearch("");
+    },
+
+		updateTypes() {
+			this.setTypes(this.types)
 		}
   }
+}
 </script>
