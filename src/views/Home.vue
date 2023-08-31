@@ -1,8 +1,8 @@
 <template>
 
-  <v-sheet class="d-flex align-content-start flex-wrap">
+  <v-sheet style="background-color: transparent; height: 100vh;" class="d-flex flex-wrap">
     <Card 
-      class="ma-5"
+      class="ma-5 mb-2"
       v-for="pokemon in readyPokemons"
       :key="pokemon.id"
       :id="pokemon.id"
@@ -10,14 +10,20 @@
       :types="pokemon.types"
       :stats="pokemon.stats"
     />
+
+    <br />
+    <div style="position: relative; bottom: 0; width: 95vw;">
+      <v-pagination
+      style="margin: 10px;"
+      active-color="#212121"
+      density="compact"
+      variant="plain"
+      v-model="pagination.page"
+      :length="Math.ceil(filteredPokemons.length / pagination.elementsPerWidth)"
+      @update:model-value="updatePage"
+      ></v-pagination>
+    </div>
   </v-sheet>
-  
-  <v-pagination
-    density="compact"
-    v-model="pagination.page"
-    :length="Math.ceil(filteredPokemons.length / pagination.elementsPerWidth)"
-    @update:model-value="updatePage"
-  ></v-pagination>
     
 </template>
 
@@ -34,7 +40,6 @@
     },
 
     data: () => ({
-      pokemons: [] as Pokemon[],
       filteredPokemons: [] as Pokemon[],
       readyPokemons: [] as Pokemon[],
       pagination: {
@@ -44,12 +49,6 @@
     }),
 
     methods: {
-      async getPokemons() {
-        await fetch(`https://pokeapi.co/api/v2/pokemon/?offset=${0}&limit=${706}`)
-        .then(res => res.json())
-        .then(res => res.results)
-        .then(res => this.getPokemonsDetail(res))
-      },
 
       async updatePage(pageNumber: number) {
 
@@ -60,23 +59,15 @@
         this.filteredPokemons = this.pokemons
 
         //Filter by name.
-        .filter(e => e.name.includes(this.search))
+        .filter((e: any) => e.name.includes(this.search))
         //Filter by type.
-        .filter(pokemon => this.types.every((pokeType: any) => 
+        .filter((pokemon: any) => this.types.every((pokeType: any) => 
           pokeType == pokemon.types[0].type.name || pokeType == pokemon.types[1]?.type.name
         ))
 
         this.readyPokemons = this.filteredPokemons
         .sort((a, b) => a.id - b.id)
         .slice(from, till);
-      },
-
-      getPokemonsDetail(pokemonArray: Pokemon[]) {
-        pokemonArray.forEach(async(pokemon) => {
-          await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-          .then(res => res.json())
-          .then(res => this.pokemons.push(res))
-        });
       },
 
       calcPokemonsPerPage() {
@@ -102,13 +93,12 @@
         if (windowWidth <= 660) {
           this.pagination.elementsPerWidth = 3;
         }
-
       }
       
     },
 
     computed: {
-      ...mapState(['search', 'types']),
+      ...mapState(['search', 'types', 'pokemons']),
   	},
 
     watch: {
@@ -124,11 +114,7 @@
 
     async mounted() {
       this.calcPokemonsPerPage();
-      this.getPokemons();
-
-      setTimeout(() => {
-        this.updatePage(this.pagination.page);
-      }, 1000);
+      this.updatePage(this.pagination.page);
     },
     
   }

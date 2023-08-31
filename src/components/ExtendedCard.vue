@@ -1,11 +1,11 @@
 <template>
   <v-dialog transition="dialog-bottom-transition" width="410">
-    <template v-slot:activator="{ props }">
-      <v-btn color="black" v-bind="props">See Details</v-btn>
+    <template v-slot:activator="{ props }" >
+      <v-btn color="#353535" v-bind="props">See Details</v-btn>
     </template>
 
     <template v-slot:default="{ isActive }">
-      <v-card>
+      <v-card color="#212121">
         <v-toolbar :color="color" :title="name" />
 
         <v-img
@@ -15,12 +15,24 @@
         />
 
         <v-container class="d-flex justify-center flex-wrap">
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> HP: {{ readyStats.hp }} </v-chip>
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> ATK: {{ readyStats.attack }} </v-chip>
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> DEF: {{ readyStats.defense }} </v-chip>
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> SPD: {{ readyStats.speed }} </v-chip>
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> SPL ATK: {{ readyStats.specialAttack }} </v-chip>
-          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color"> SPL DEF: {{ readyStats.specialDefense }} </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> HP: {{ readyStats.hp }} </h5>
+          </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> ATK: {{ readyStats.attack }} </h5>
+          </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> DEF: {{ readyStats.defense }} </h5>
+          </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> SPD: {{ readyStats.speed }} </h5>
+          </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> SPL ATK: {{ readyStats.specialAttack }} </h5>
+          </v-chip>
+          <v-chip style="width: 110px; justify-content: center;" class="ma-2" variant="elevated" :color="color">
+            <h5 style="color: #212121;"> SPL DEF: {{ readyStats.specialDefense }} </h5>
+          </v-chip>
         </v-container>
 
         <v-card-actions>

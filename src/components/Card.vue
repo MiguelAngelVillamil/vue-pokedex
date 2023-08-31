@@ -1,12 +1,12 @@
 <template>
 
-  <v-card class="mx-auto" width="300" :color="mainColor + '80'">
+  <v-card class="mx-auto" width="300" height="175" :color="mainColor + 'AA'">
     <v-card
       style="height: 120px; padding-left: 15px; padding-top: 5px"
       elevation="0"
       :color="mainColor"
     >
-      <v-card-title class="text-h6 pa-0 mb-2 d-flex flex-row">
+      <v-card-title style="color: #212121;" class="text-h6 pa-0 mb-2 d-flex flex-row">
         {{ name[0].toUpperCase() + name.slice(1) }}
         <v-spacer />
         <v-btn class="ma-1 mr-3" variant="tonal" size="small" disabled density="comfortable"> #{{ id }} </v-btn>

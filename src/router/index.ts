@@ -4,6 +4,9 @@ const routes = [
   {
     path: "/",
     component: () => import("@/views/Welcome.vue"),
+    meta: {
+      hideNavbar: true,
+    }
   },
   {
     path: "/home",
